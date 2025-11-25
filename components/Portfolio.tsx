@@ -4,7 +4,7 @@ import { CONTACT_INFO } from '../constants';
 
 const Portfolio: React.FC = () => {
   return (
-    <section id="portfolio" className="py-24 bg-brand-dark relative overflow-hidden">
+    <section id="portfolio" className="py-24 bg-brand-dark relative overflow-hidden scroll-mt-20">
       {/* Background elements */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-neonPurple/5 to-transparent"></div>
       <div className="absolute bottom-0 left-0 w-1/2 h-full bg-gradient-to-r from-brand-neonCyan/5 to-transparent"></div>

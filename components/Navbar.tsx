@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Menu, X, Rocket } from 'lucide-react';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  onOpenBooking: (interest?: string) => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
@@ -10,6 +14,16 @@ const Navbar: React.FC = () => {
     { name: 'Pricing', href: '#pricing' },
     { name: 'Contact', href: '#contact' },
   ];
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsOpen(false);
+    
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <nav className="fixed top-0 w-full z-50 glass-panel border-b border-cyan-500/20">
@@ -28,17 +42,18 @@ const Navbar: React.FC = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="hover:text-brand-neonCyan transition-colors px-3 py-2 rounded-md text-sm font-medium uppercase tracking-widest"
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="hover:text-brand-neonCyan transition-colors px-3 py-2 rounded-md text-sm font-medium uppercase tracking-widest cursor-pointer"
                 >
                   {link.name}
                 </a>
               ))}
-              <a 
-                href="#contact"
-                className="bg-brand-neonCyan text-black font-bold px-6 py-2 rounded-full hover:bg-cyan-300 transition-all shadow-[0_0_15px_rgba(6,182,212,0.5)]"
+              <button 
+                onClick={() => onOpenBooking('Get Started')}
+                className="bg-brand-neonCyan text-black font-bold px-6 py-2 rounded-full hover:bg-cyan-300 transition-all shadow-[0_0_15px_rgba(6,182,212,0.5)] cursor-pointer"
               >
                 Get Started
-              </a>
+              </button>
             </div>
           </div>
 
@@ -62,11 +77,20 @@ const Navbar: React.FC = () => {
                 key={link.name}
                 href={link.href}
                 className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => handleNavClick(e, link.href)}
               >
                 {link.name}
               </a>
             ))}
+            <button
+              onClick={() => {
+                onOpenBooking('Get Started');
+                setIsOpen(false);
+              }}
+              className="w-full text-left bg-brand-neonCyan/10 text-brand-neonCyan block px-3 py-2 rounded-md text-base font-bold mt-4 border border-brand-neonCyan/30"
+            >
+              Get Started
+            </button>
           </div>
         </div>
       )}

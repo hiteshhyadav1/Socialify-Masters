@@ -2,9 +2,13 @@ import React from 'react';
 import { PRICING } from '../constants';
 import { Check } from 'lucide-react';
 
-const Pricing: React.FC = () => {
+interface PricingProps {
+  onOpenBooking: (planName: string) => void;
+}
+
+const Pricing: React.FC<PricingProps> = ({ onOpenBooking }) => {
   return (
-    <section id="pricing" className="py-24 relative overflow-hidden">
+    <section id="pricing" className="py-24 relative overflow-hidden scroll-mt-20">
       {/* Background Decor */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-neonCyan/5 rounded-full blur-[100px] -z-10"></div>
 
@@ -45,11 +49,14 @@ const Pricing: React.FC = () => {
                 ))}
               </ul>
 
-              <button className={`w-full py-3 rounded-lg font-bold transition-all ${
-                plan.recommended 
-                  ? 'bg-brand-neonCyan text-black hover:bg-cyan-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]' 
-                  : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'
-              }`}>
+              <button 
+                onClick={() => onOpenBooking(`${plan.name} Plan`)}
+                className={`w-full py-3 rounded-lg font-bold transition-all ${
+                  plan.recommended 
+                    ? 'bg-brand-neonCyan text-black hover:bg-cyan-300 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]' 
+                    : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'
+                }`}
+              >
                 Choose {plan.name}
               </button>
             </div>

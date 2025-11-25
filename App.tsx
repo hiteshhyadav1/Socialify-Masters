@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -6,19 +6,34 @@ import Portfolio from './components/Portfolio';
 import Pricing from './components/Pricing';
 import LeadMagnet from './components/LeadMagnet';
 import Contact from './components/Contact';
+import BookingModal from './components/BookingModal';
 import { MessageCircle } from 'lucide-react';
 import { CONTACT_INFO } from './constants';
 
 const App: React.FC = () => {
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [bookingInterest, setBookingInterest] = useState('');
+
+  const handleOpenBooking = (interest: string = '') => {
+    setBookingInterest(interest);
+    setIsBookingOpen(true);
+  };
+
   return (
     <div className="bg-brand-dark min-h-screen text-white font-sans selection:bg-brand-neonCyan selection:text-black">
-      <Navbar />
-      <Hero />
-      <Services />
+      <Navbar onOpenBooking={handleOpenBooking} />
+      <Hero onOpenBooking={() => handleOpenBooking('Strategy Call')} />
+      <Services onOpenBooking={handleOpenBooking} />
       <Portfolio />
-      <Pricing />
+      <Pricing onOpenBooking={handleOpenBooking} />
       <LeadMagnet />
       <Contact />
+
+      <BookingModal 
+        isOpen={isBookingOpen} 
+        onClose={() => setIsBookingOpen(false)} 
+        initialInterest={bookingInterest}
+      />
 
       {/* Persistent WhatsApp Floating Button */}
       <a 

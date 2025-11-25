@@ -2,9 +2,13 @@ import React from 'react';
 import { SERVICES } from '../constants';
 import { Check, ArrowRight } from 'lucide-react';
 
-const Services: React.FC = () => {
+interface ServicesProps {
+  onOpenBooking: (serviceName: string) => void;
+}
+
+const Services: React.FC<ServicesProps> = ({ onOpenBooking }) => {
   return (
-    <section id="services" className="py-24 relative bg-brand-surface/50">
+    <section id="services" className="py-24 relative bg-brand-surface/50 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
@@ -79,7 +83,10 @@ const Services: React.FC = () => {
                 ))}
               </ul>
 
-              <button className="flex items-center text-brand-neonCyan text-sm font-bold uppercase tracking-wider group-hover:gap-2 transition-all">
+              <button 
+                onClick={() => onOpenBooking(service.title)}
+                className="flex items-center text-brand-neonCyan text-sm font-bold uppercase tracking-wider group-hover:gap-2 transition-all hover:text-cyan-300"
+              >
                 Learn More <ArrowRight className="h-4 w-4 ml-1" />
               </button>
             </div>

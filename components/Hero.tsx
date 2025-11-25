@@ -1,7 +1,11 @@
 import React from 'react';
 import { ArrowRight, Play } from 'lucide-react';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onOpenBooking: (interest?: string) => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       {/* Background Gradients */}
@@ -28,18 +32,21 @@ const Hero: React.FC = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <button className="group relative px-8 py-4 bg-transparent border border-cyan-500/50 text-cyan-400 font-bold rounded-lg overflow-hidden transition-all hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+            <button 
+              onClick={() => onOpenBooking('Strategy Call')}
+              className="group relative px-8 py-4 bg-transparent border border-cyan-500/50 text-cyan-400 font-bold rounded-lg overflow-hidden transition-all hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+            >
               <span className="relative z-10 flex items-center gap-2">
                 Get Free Strategy Call <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </span>
               <div className="absolute inset-0 bg-cyan-900/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
             </button>
-            <button className="flex items-center gap-3 px-8 py-4 bg-white/5 backdrop-blur-sm rounded-lg hover:bg-white/10 transition-all border border-white/10">
+            <a href="#portfolio" className="flex items-center gap-3 px-8 py-4 bg-white/5 backdrop-blur-sm rounded-lg hover:bg-white/10 transition-all border border-white/10">
               <div className="w-10 h-10 rounded-full bg-brand-neonPurple/20 flex items-center justify-center border border-brand-neonPurple/50">
                 <Play className="h-4 w-4 text-brand-neonPurple fill-current" />
               </div>
               <span className="font-semibold">View Our Work</span>
-            </button>
+            </a>
           </div>
         </div>
 
