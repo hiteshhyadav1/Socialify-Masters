@@ -149,7 +149,7 @@ const Contact: React.FC = () => {
                 className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 py-4 rounded-lg font-bold text-white hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {status === 'submitting' ? (
-                    <>Sending... <Loader2 className="h-4 w-4 animate-spin" /></>
+                    <><Loader2 className="h-4 w-4 animate-spin" /> Sending...</>
                 ) : (
                     <>Send Message <Send className="h-4 w-4" /></>
                 )}
